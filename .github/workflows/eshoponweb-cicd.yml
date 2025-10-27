@@ -3,11 +3,11 @@ name: eShopOnWeb Build and Test
 on: [push, workflow_dispatch]
 
 env:
-  RESOURCE_GROUP: rg-eshoponweb-westeurope
-  LOCATION: westeurope
+  RESOURCE_GROUP: rg-eshoponweb-eastus2
+  LOCATION: eastus2
   TEMPLATE_FILE: infra/webapp.bicep
   SUBSCRIPTION_ID: be12bac3-d70f-49ac-b802-1ed971da2364
-  WEBAPP_NAME: devops-webapp-westeurope-55931093
+  WEBAPP_NAME: devops-webapp-eastus2-55931093
 
 jobs:
   buildandtest:
