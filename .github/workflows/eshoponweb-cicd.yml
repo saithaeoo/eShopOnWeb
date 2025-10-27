@@ -73,14 +73,16 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-    - name: Deploy Azure WebApp using Bicep
-      uses: azure/arm-deploy@v2
+    - name: Deploy Azure WebApp using Bicep (CLI with debug)
+      uses: Azure/cli@v2
       with:
-        subscriptionId: ${{ env.SUBSCRIPTION_ID }}
-        resourceGroupName: ${{ env.RESOURCE_GROUP }}
-        template: bicep-template/webapp.bicep
-        parameters: 'webAppName=${{ env.WEBAPP_NAME }} location=${{ env.LOCATION }}'
-        failOnStdErr: false
+        inlineScript: |
+          az deployment group create \
+            --subscription ${{ env.SUBSCRIPTION_ID }} \
+            --resource-group ${{ env.RESOURCE_GROUP }} \
+            --template-file bicep-template/webapp.bicep \
+            --parameters webAppName=${{ env.WEBAPP_NAME }} location=${{ env.LOCATION }} \
+            --debug
 
     - name: Publish Website to WebApp using CLI
       uses: Azure/cli@v2
